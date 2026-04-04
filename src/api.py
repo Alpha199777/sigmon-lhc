@@ -1,4 +1,7 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import List, Optional
 from src.ingestion import ingest_circuits
@@ -10,6 +13,19 @@ app = FastAPI(
     version="1.0.0",
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.mount("/static", StaticFiles(directory="frontend"), name="static")
+
+
+@app.get("/dashboard")
+def dashboard():
+    return FileResponse("frontend/index.html")
 
 class IngestionRequest(BaseModel):
     circuit_ids: List[str]

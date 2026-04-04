@@ -9,6 +9,7 @@ def generate_signal(
     sampling_rate: float = 100.0,
     noise_level: float = 0.05,
     anomaly: bool = False,
+    temp_base: float = 1.9,
 ) -> pd.DataFrame:
     """
     Simulate LHC magnet circuit signal data.
@@ -26,7 +27,7 @@ def generate_signal(
     t = np.linspace(0, n_samples / sampling_rate, n_samples)
     current = 11850 + 50 * np.sin(2 * np.pi * 0.1 * t) + noise_level * np.random.randn(n_samples)
     voltage = 0.1 * current + noise_level * np.random.randn(n_samples)
-    temperature = 1.9 + 0.01 * np.sin(2 * np.pi * 0.05 * t) + noise_level * 0.1 * np.random.randn(n_samples)
+    temperature = temp_base + 0.01 * np.sin(2 * np.pi * 0.05 * t) + noise_level * 0.1 * np.random.randn(n_samples)
 
     if anomaly:
         anomaly_idx = np.random.randint(n_samples // 2, n_samples)

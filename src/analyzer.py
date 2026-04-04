@@ -28,7 +28,7 @@ def compute_statistics(df: pd.DataFrame) -> dict:
 def detect_anomalies(
     df: pd.DataFrame,
     current_threshold: float = 3.0,
-    temperature_limit: float = 2.5,
+    temperature_limit: float = 2.0,
 ) -> pd.DataFrame:
     """
     Detect anomalies using z-score and threshold methods.

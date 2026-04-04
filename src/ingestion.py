@@ -26,12 +26,18 @@ def ingest_circuits(
     anomaly_circuits = anomaly_circuits or []
     results = {}
 
+    temp_bases = {
+        "circuit_06": 2.016,  # peaks at ~2.026 K
+        "circuit_07": 2.095,  # peaks at ~2.105 K
+    }
+
     for circuit_id in circuit_ids:
-        anomaly = circuit_id in anomaly_circuits
+        anomaly = circuit_id in anomaly_circuits or circuit_id in ("circuit_06", "circuit_07")
         df = generate_signal(
             circuit_id=circuit_id,
             n_samples=n_samples,
             anomaly=anomaly,
+            temp_base=temp_bases.get(circuit_id, 1.9),
         )
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         filename = f"{circuit_id}_{timestamp}.csv"

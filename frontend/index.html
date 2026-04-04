@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SigMon-LHC — Circuit Monitoring Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0e0e0; }
+        header { background: #1a1a2e; padding: 20px 40px; border-bottom: 2px solid #00d4ff; display: flex; align-items: center; gap: 20px; }
+        header h1 { color: #00d4ff; font-size: 1.5rem; }
+        header span { color: #888; font-size: 0.9rem; }
+        .container { padding: 30px 40px; }
+        .controls { display: flex; gap: 15px; margin-bottom: 30px; align-items: center; }
+        input { background: #1a1a2e; border: 1px solid #333; color: #fff; padding: 10px 15px; border-radius: 6px; font-size: 0.9rem; width: 200px; }
+        button { padding: 10px 24px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: bold; }
+        .btn-analyze { background: #00d4ff; color: #0a0a1a; }
+        .btn-analyze:hover { background: #00b8d9; }
+        .btn-clear { background: #333; color: #fff; }
+        #status-msg { color: #888; font-size: 0.85rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #1a1a2e; border-radius: 10px; padding: 20px; border-left: 4px solid #333; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-3px); }
+        .card.ok { border-left-color: #00ff88; }
+        .card.warning { border-left-color: #ffaa00; }
+        .card.critical { border-left-color: #ff4444; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .card-title { font-size: 1rem; font-weight: bold; color: #fff; }
+        .badge { padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; }
+        .badge.ok { background: #00ff8822; color: #00ff88; }
+        .badge.warning { background: #ffaa0022; color: #ffaa00; }
+        .badge.critical { background: #ff444422; color: #ff4444; }
+        .metric { display: flex; justify-content: space-between; margin: 6px 0; font-size: 0.85rem; }
+        .metric-label { color: #888; }
+        .metric-value { color: #fff; font-weight: 500; }
+        #summary { margin-bottom: 30px; display: flex; gap: 20px; }
+        .stat-box { background: #1a1a2e; border-radius: 8px; padding: 15px 25px; text-align: center; }
+        .stat-box .number { font-size: 2rem; font-weight: bold; }
+        .stat-box .label { color: #888; font-size: 0.8rem; margin-top: 4px; }
+        .ok-color { color: #00ff88; }
+        .warning-color { color: #ffaa00; }
+        .critical-color { color: #ff4444; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>⚡ SigMon-LHC</h1>
+        <span>Signal Monitoring & Analysis System — CERN LHC</span>
+    </header>
+
+    <div class="container">
+        <div class="controls">
+            <select id="circuit-input" multiple style="background:#1a1a2e; border:1px solid #333; color:#fff; padding:8px; border-radius:6px; height:80px; font-size:0.85rem;">
+    <option value="circuit_01" selected>circuit_01</option>
+    <option value="circuit_02" selected>circuit_02</option>
+    <option value="circuit_03" selected>circuit_03</option>
+    <option value="circuit_04" selected>circuit_04</option>
+    <option value="circuit_05" selected>circuit_05</option>
+    <option value="circuit_06">circuit_06⚠️</option>
+    <option value="circuit_07">circuit_07⚠️</option>
+</select>
+            <input type="number" id="samples-input" placeholder="Samples" value="1000" min="100" max="5000"/>
+            <button class="btn-analyze" id="btn-analyze">▶ Analyze</button>
+            <button class="btn-clear" id="btn-clear">✕ Clear</button>
+            <span id="status-msg">Enter circuit IDs and click Analyze.</span>
+        </div>
+
+        <div id="summary"></div>
+        <div id="grid" class="grid"></div>
+    </div>
+
+    <script src="/static/dashboard.js"></script>
+</body>
+</html>
