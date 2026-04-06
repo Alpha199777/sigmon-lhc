@@ -1,9 +1,8 @@
 ﻿fastapi
-uvicorn
+uvicorn[standard]
 pandas
 numpy
 sqlalchemy
-pytest
 scikit-learn
 python-dotenv
 aiofiles
