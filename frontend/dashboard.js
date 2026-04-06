@@ -1,4 +1,4 @@
-const API_URL = "";
+const API_URL = window.location.origin;
 
 async function analyzeCircuits() {
     console.log("Analyze clicked");
