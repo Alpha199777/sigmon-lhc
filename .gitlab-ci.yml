@@ -16,7 +16,6 @@ test:
     - pip install pytest pandas numpy scikit-learn
   script:
     - python -m pytest tests/ -v
-  allow_failure: false
 
 lint:
   stage: lint
