@@ -1,20 +1,18 @@
-# SigMon-LHC � Signal Monitoring & Analysis System
+---
+title: SigMon LHC
+emoji: ⚡
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+pinned: false
+---
 
-## Overview
+# SigMon-LHC — Signal Monitoring & Analysis System
+
 Python-based system to process, analyze, and visualize large-scale signal data from LHC superconducting magnet circuits. Inspired by the CERN SigMon project.
 
 ## Tech Stack
 - Backend: FastAPI
 - Data Processing: Pandas, NumPy
-- Database: PostgreSQL
-- Visualization: Plotly / Dash
-- Testing: Pytest
+- ML: Scikit-learn (Isolation Forest)
 - CI/CD: GitLab
-
-## Project Structure
-- src/         ? Source code
-- tests/        ? Automated tests
-- data/         ? Raw and processed data
-- notebooks/    ? Jupyter analysis notebooks
-- docs/         ? Documentation
-- config/       ? Configuration files
