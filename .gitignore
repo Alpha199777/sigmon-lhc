@@ -11,3 +11,4 @@ build/
 .ipynb_checkpoints/
 data/raw/
 .claude/
+node-server/node_modules/
