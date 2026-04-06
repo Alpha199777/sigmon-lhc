@@ -1,0 +1,28 @@
+stages:
+  - test
+  - lint
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+  paths:
+    - .cache/pip/
+
+test:
+  stage: test
+  image: python:3.12
+  before_script:
+    - pip install pytest pandas numpy scikit-learn
+  script:
+    - python -m pytest tests/ -v
+  allow_failure: false
+
+lint:
+  stage: lint
+  image: python:3.12
+  before_script:
+    - pip install flake8
+  script:
+    - flake8 src/ --max-line-length=120 --ignore=E501,W503
+  allow_failure: true
